@@ -1,3 +1,18 @@
+@font-face {
+    font-family: 'Digital';
+    src: url('fonts/digital-7_mono-webfont.eot');
+    src: url('fonts/digital-7_mono-webfont.eot?#iefix') format('embedded-opentype'),
+        url('fonts/digital-7_mono-webfont.woff2') format('woff2'),
+        url('fonts/digital-7_mono-webfont.woff') format('woff'),
+        url('fonts/digital-7_mono-webfont.ttf') format('truetype'),
+        url('fonts/digital-7_mono-webfont.svg#digital-7_monomono') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
 input {
     text-align: right;
+    font-family: Digital;
+    font-size: 30px;
 }
+
