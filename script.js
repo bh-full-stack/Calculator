@@ -6,7 +6,14 @@ window.onload = function() {
     var operator =  "+";
     display.value = "0";
 
-
+    function operation(operand1, operand2, operator) {
+        switch (operator) {
+            case "+":
+                return operand1 + operand2;
+            case "-":
+                return operand1 - operand2;
+        }
+    }
 
     document.onkeydown = function(event) {
         // Input type handling
@@ -33,19 +40,24 @@ window.onload = function() {
             case "Delete":
             case "Backspace":
                 display.value = "0";
+                subtotal = 0;
+                operator = "+";
+                editable = false;
                 break;
             case "+":
+            case "-":
                 if (editable) {
-                    subtotal = subtotal + parseInt(display.value);
+                    subtotal = operation(subtotal, parseInt(display.value), operator);
                     display.value = subtotal.toString();
                     editable = false;
                 }
-                operator = "+";
+                operator = event.key;
                 break;
             case "=":
             case "Enter":
                 if (editable) {
-                    display.value = (subtotal + parseInt(display.value)).toString();
+                    var temp = operation(subtotal, parseInt(display.value), operator);
+                    display.value = temp.toString();
                     subtotal = 0;
                     operator = "+";
                     editable = false;
