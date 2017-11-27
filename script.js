@@ -1,24 +1,15 @@
 window.onload = function() {
+    // Default state
     var subtotal = 0;
     var display = document.querySelector("#display");
     var editable = false;
+    var operator =  "+";
     display.value = "0";
 
-    document.onkeydown = function(event) {
-        // Handle numbers
-        /*var allowed = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"].indexOf(event.key) > -1;
-        if (allowed && (display.value.length < 8)) {
-            if (display.value == "0") {
-                display.value = event.key;
-            } else {
-                display.value += event.key;
-            }
-        }
-        // Clear display
-        if (["Delete", "Backspace"].indexOf(event.key) > -1) {
-            display.value = "0";
-        }*/
 
+
+    document.onkeydown = function(event) {
+        // Input type handling
         switch (event.key) {
             case "0":
             case "1":
@@ -44,13 +35,21 @@ window.onload = function() {
                 display.value = "0";
                 break;
             case "+":
-                subtotal = parseInt(display.value);
-                editable = false;
+                if (editable) {
+                    subtotal = subtotal + parseInt(display.value);
+                    display.value = subtotal.toString();
+                    editable = false;
+                }
+                operator = "+";
                 break;
             case "=":
             case "Enter":
-                display.value = (parseInt(display.value) + subtotal).toString();
-                editable = false;
+                if (editable) {
+                    display.value = (subtotal + parseInt(display.value)).toString();
+                    subtotal = 0;
+                    operator = "+";
+                    editable = false;
+                }
                 break;
         }
 
