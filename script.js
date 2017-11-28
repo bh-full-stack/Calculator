@@ -37,8 +37,12 @@ window.onload = function() {
                     }
                 }
                 break;
-            case "Delete":
             case "Backspace":
+                if (display.value.length > 1) {
+                    display.value = display.value.slice(0, length - 1);
+                    break;
+                }
+            case "Delete":
                 display.value = "0";
                 subtotal = 0;
                 operator = "+";
