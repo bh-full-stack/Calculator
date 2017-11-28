@@ -6,9 +6,8 @@ window.onload = function() {
     var display = displayFactory();
     display.numberReset();
 
-    document.onkeydown = function(event) {
-        // Input type handling
-        switch (event.key) {
+    function eventHandler(key) {
+        switch (key) {
             case "0":
             case "1":
             case "2":
@@ -21,16 +20,18 @@ window.onload = function() {
             case "9":
                 if (!(editable && display.numberLength() >= 8)) {
                     if (editable && display.numberValue() != "0") {
-                        display.setNumber(event.key);
+                        display.setNumber(key);
                     } else {
                         display.numberReset();
-                        display.setNumber(event.key);
+                        display.setNumber(key);
                         editable = true;
                     }
                 }
                 break;
             case "Delete":
             case "Backspace":
+            case "C":
+            case "c":
                 display.numberReset();
                 subtotal = 0;
                 operator = "+";
@@ -51,7 +52,7 @@ window.onload = function() {
                     }
                     editable = false;
                 }
-                operator = event.key;
+                operator = key;
                 break;
             case "=":
             case "Enter":
@@ -65,8 +66,17 @@ window.onload = function() {
                 }
                 break;
         }
+    }
 
+    document.onkeydown = function(event) {
+        eventHandler(event.key);
         console.log(event.key);
-
     };
+
+    document.querySelectorAll("input[type='button']").forEach(function(element) {
+        element.onclick = function (event) {
+            eventHandler(event.target.value);
+            console.log(event.target.value);
+        };
+    });
 };
