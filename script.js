@@ -42,6 +42,7 @@ window.onload = function() {
                     display.value = display.value.slice(0, length - 1);
                     break;
                 }
+                // Falls through
             case "Delete":
                 display.value = "0";
                 subtotal = 0;
