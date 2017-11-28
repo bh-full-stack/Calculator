@@ -12,6 +12,8 @@ window.onload = function() {
                 return operand1 + operand2;
             case "-":
                 return operand1 - operand2;
+            case "*":
+                return operand1 * operand2;
         }
     }
 
@@ -46,6 +48,7 @@ window.onload = function() {
                 break;
             case "+":
             case "-":
+            case "*":
                 if (editable) {
                     subtotal = operation(subtotal, parseInt(display.value), operator);
                     display.value = subtotal.toString();
