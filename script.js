@@ -68,6 +68,7 @@ window.onload = function() {
                 }
                 break;
         }
+        
         console.log(event.key);
     };
 };
