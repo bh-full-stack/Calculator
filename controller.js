@@ -1,23 +1,10 @@
 window.onload = function() {
     // Default state
     var subtotal = 0;
-    var display = document.querySelector("#display");
     var editable = false;
     var operator =  "+";
-    display.value = "0";
-
-    function operation(operand1, operand2, operator) {
-        switch (operator) {
-            case "+":
-                return operand1 + operand2;
-            case "-":
-                return operand1 - operand2;
-            case "*":
-                return operand1 * operand2;
-            case "/":
-                return operand1 / operand2;
-        }
-    }
+    var display = displayFactory();
+    display.numberReset();
 
     document.onkeydown = function(event) {
         // Input type handling
@@ -32,18 +19,19 @@ window.onload = function() {
             case "7":
             case "8":
             case "9":
-                if (!(editable && display.value.length >= 8)) {
-                    if (editable && display.value != "0") {
-                        display.value += event.key;
+                if (!(editable && display.numberLength() >= 8)) {
+                    if (editable && display.numberValue() != "0") {
+                        display.setNumber(event.key);
                     } else {
-                        display.value = event.key;
+                        display.numberReset();
+                        display.setNumber(event.key);
                         editable = true;
                     }
                 }
                 break;
             case "Delete":
             case "Backspace":
-                display.value = "0";
+                display.numberReset();
                 subtotal = 0;
                 operator = "+";
                 editable = false;
@@ -53,8 +41,14 @@ window.onload = function() {
             case "*":
             case "/":
                 if (editable) {
-                    subtotal = operation(subtotal, parseInt(display.value), operator);
-                    display.value = subtotal.toString();
+                    subtotal = operation(subtotal, parseInt(display.numberValue()), operator);
+                    display.numberReset();
+                    if (display.setNumber(subtotal)) {
+                        subtotal = 0;
+                        operator = "+";
+                        editable = false;
+                        break;
+                    }
                     editable = false;
                 }
                 operator = event.key;
@@ -62,8 +56,9 @@ window.onload = function() {
             case "=":
             case "Enter":
                 if (editable) {
-                    var temp = operation(subtotal, parseInt(display.value), operator);
-                    display.value = temp.toString();
+                    var temp = operation(subtotal, parseInt(display.numberValue()), operator);
+                    display.numberReset();
+                    display.setNumber(temp);
                     subtotal = 0;
                     operator = "+";
                     editable = false;
