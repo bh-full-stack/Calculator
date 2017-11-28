@@ -23,6 +23,19 @@
     letter-spacing: 3.5px;
 }
 
+.table {
+    display: table;
+    border-collapse: collapse;
+
+    .table-row {
+        display: table-row;
+
+        .table-cell {
+            display: table-cell;
+        }
+    }
+}
+
 input[type="button"] {
     border-radius: 50%;
     border: none;
@@ -33,40 +46,25 @@ input[type="button"] {
     background: linear-gradient(to bottom right, grey, black 80%);
     box-shadow: 0 0 2px black;
     outline: 0;
-}
 
-input[type="button"]:active {
-    /*background: red !important;*/
-    background: linear-gradient(to top left, grey, black 80%);
+    &:active {
+        background: linear-gradient(to top left, grey, black 80%);
+    }
 }
 
 .brown {
     background: linear-gradient(to bottom right, #8c746a, #210f03 80%) !important;
-}
 
-.brown:active {
-    background: linear-gradient(to top left, #8c746a, #210f03 80%) !important;
+    &:active {
+        background: linear-gradient(to top left, #8c746a, #210f03 80%) !important;
+    }
 }
 
 .orange {
     background: linear-gradient(to bottom right, white, darkorange 80%) !important;
     color: black !important;
-}
 
-.orange:active {
-    background: linear-gradient(to top left, white, darkorange 80%) !important;
-    color: black !important;
-}
-
-.table{
-    display: table;
-    border-collapse:collapse;
-}
-
-.table-row{
-    display: table-row;
-}
-
-.table-cell {
-    display: table-cell;
+    &:active {
+        background: linear-gradient(to top left, white, darkorange 80%) !important;
+    }
 }
