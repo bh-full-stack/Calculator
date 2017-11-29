@@ -3,27 +3,29 @@ function displayFactory() {
     return {
         appendValue: function (digit) {
             if (digit == Infinity) {
-                displayDomElement.value = "Error";
+                displayDomElement.innerHTML = "Error";
                 return true;
             }
-            if (displayDomElement.value == "0" && digit != ".") {
-                displayDomElement.value = digit.toString();
+            var preparedDigit = digit.toString().replace(".", "<span>.</span>");
+            if (displayDomElement.innerHTML == "0" && digit != ".") {
+                displayDomElement.innerHTML = preparedDigit;
             } else {
-                displayDomElement.value += digit.toString();
+                displayDomElement.innerHTML += preparedDigit;
             }
             return false;
         },
         numberReset: function () {
-            displayDomElement.value = "0";
+            displayDomElement.innerHTML = "0";
         },
         numberValue: function () {
-            return displayDomElement.value;
+            return displayDomElement.innerText;
         },
         numberLength: function () {
-            return displayDomElement.length;
+            console.log(displayDomElement.innerText.replace(".", "").length, "length");
+            return displayDomElement.innerText.replace(".", "").length;
         },
         numberHasDot: function () {
-            return displayDomElement.value.indexOf(".") > -1;
+            return displayDomElement.innerHTML.indexOf(".") > -1;
         }
     };
 }

@@ -28,6 +28,10 @@ form {
     height: 551px;
 }
 
+span {
+    margin: -9px;
+}
+
 .display-background {
     position: absolute;
     top: 80px;
@@ -50,6 +54,7 @@ form {
     padding: 3px 10px 1px;
     box-shadow: inset -3px 2px 4px rgba(0, 0, 0, 0.5);
     width: 168px;
+    height: 32px;
     color: #5a5c68;
     letter-spacing: 3.5px;
     border: none;
