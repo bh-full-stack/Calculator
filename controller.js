@@ -54,7 +54,7 @@ window.onload = function() {
             case "*":
             case "/":
                 if (editable) {
-                    subtotal = operation(subtotal, parseInt(display.numberValue()), operator);
+                    subtotal = operation(subtotal, parseFloat(display.numberValue()), operator);
                     display.numberReset();
                     if (display.appendValue(subtotal)) {
                         subtotal = 0;
@@ -69,7 +69,7 @@ window.onload = function() {
             case "=":
             case "Enter":
                 if (editable) {
-                    var temp = operation(subtotal, parseInt(display.numberValue()), operator);
+                    var temp = operation(subtotal, parseFloat(display.numberValue()), operator);
                     display.numberReset();
                     display.appendValue(temp);
                     subtotal = 0;
