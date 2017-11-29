@@ -18,25 +18,23 @@ window.onload = function() {
             case "7":
             case "8":
             case "9":
-                if (!(editable && display.numberLength() >= 8)) {
-                    if (editable && display.numberValue() != "0") {
-                        display.appendValue(key);
-                    } else {
-                        display.numberReset();
-                        display.appendValue(key);
-                        editable = true;
-                    }
+                if (editable && display.numberValue() != "0") {
+                    display.numberAddDigit(key);
+                } else {
+                    display.numberReset();
+                    display.numberAddDigit(key);
+                    editable = true;
                 }
                 break;
             case ".":
             case ",":
                 if (editable) {
                     if (!display.numberHasDot()) {
-                        display.appendValue(".");
+                        display.numberAddDigit(".");
                     }
                 } else {
                     display.numberReset();
-                    display.appendValue(".");
+                    display.numberAddDigit(".");
                     editable = true;
                 }
                 break;
@@ -56,7 +54,7 @@ window.onload = function() {
                 if (editable) {
                     subtotal = operation(subtotal, parseFloat(display.numberValue()), operator);
                     display.numberReset();
-                    if (display.appendValue(subtotal)) {
+                    if (display.numberShow(subtotal)) {
                         subtotal = 0;
                         operator = "+";
                         editable = false;
@@ -71,7 +69,7 @@ window.onload = function() {
                 if (editable) {
                     var temp = operation(subtotal, parseFloat(display.numberValue()), operator);
                     display.numberReset();
-                    display.appendValue(temp);
+                    display.numberShow(temp);
                     subtotal = 0;
                     operator = "+";
                     editable = false;
