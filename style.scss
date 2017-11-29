@@ -68,3 +68,11 @@ input[type="button"] {
         background: linear-gradient(to top left, white, darkorange 80%) !important;
     }
 }
+
+.green {
+    background: linear-gradient(to bottom right, #6e7e74, #18251c 80%) !important;
+
+    &:active {
+        background: linear-gradient(to top left, #6e7e74, #18251c 80%) !important;
+    }
+}
