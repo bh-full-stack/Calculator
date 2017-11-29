@@ -43,28 +43,30 @@ input[type="button"] {
     color: white;
     width: 38px;
     height: 38px;
-    background: linear-gradient(to bottom right, grey, black 80%);
-    box-shadow: 0 0 2px black;
+    background: #0C0C0C;
+    box-shadow: inset 18px 18px 3px -16px #8F8F91, 0 0 2px black;
     outline: 0;
 
     &:active {
-        background: linear-gradient(to top left, grey, black 80%);
+        box-shadow: inset -18px -18px 3px -16px #8F8F91, 0 0 2px black;
     }
 }
 
 .brown {
-    background: linear-gradient(to bottom right, #8c746a, #210f03 80%) !important;
+    background: #332016 !important;
+    box-shadow: inset 18px 18px 12px -16px #B3A29B, 0 0 2px black !important;
 
     &:active {
-        background: linear-gradient(to top left, #8c746a, #210f03 80%) !important;
+        box-shadow: inset -18px -18px 12px -16px #B3A29B, 0 0 2px black !important;
     }
 }
 
 .orange {
-    background: linear-gradient(to bottom right, white, darkorange 80%) !important;
+    background: #DCA84F !important;
+    box-shadow: inset 18px 18px 12px -16px #F4D9A7, 0 0 2px black !important;
     color: black !important;
 
     &:active {
-        background: linear-gradient(to top left, white, darkorange 80%) !important;
+        box-shadow: inset -18px -18px 12px -16px #F4D9A7, 0 0 2px black !important;
     }
 }
