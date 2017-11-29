@@ -20,12 +20,24 @@ window.onload = function() {
             case "9":
                 if (!(editable && display.numberLength() >= 8)) {
                     if (editable && display.numberValue() != "0") {
-                        display.setNumber(key);
+                        display.appendValue(key);
                     } else {
                         display.numberReset();
-                        display.setNumber(key);
+                        display.appendValue(key);
                         editable = true;
                     }
+                }
+                break;
+            case ".":
+            case ",":
+                if (editable) {
+                    if (!display.numberHasDot()) {
+                        display.appendValue(".");
+                    }
+                } else {
+                    display.numberReset();
+                    display.appendValue(".");
+                    editable = true;
                 }
                 break;
             case "Delete":
@@ -44,7 +56,7 @@ window.onload = function() {
                 if (editable) {
                     subtotal = operation(subtotal, parseInt(display.numberValue()), operator);
                     display.numberReset();
-                    if (display.setNumber(subtotal)) {
+                    if (display.appendValue(subtotal)) {
                         subtotal = 0;
                         operator = "+";
                         editable = false;
@@ -59,7 +71,7 @@ window.onload = function() {
                 if (editable) {
                     var temp = operation(subtotal, parseInt(display.numberValue()), operator);
                     display.numberReset();
-                    display.setNumber(temp);
+                    display.appendValue(temp);
                     subtotal = 0;
                     operator = "+";
                     editable = false;
