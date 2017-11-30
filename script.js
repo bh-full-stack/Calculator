@@ -38,7 +38,7 @@ window.onload = function() {
                 }
                 break;
             case "Backspace":
-                if (display.value.length > 1) {
+                if (editable && display.value.length > 1) {
                     display.value = display.value.slice(0, length - 1);
                     break;
                 }
