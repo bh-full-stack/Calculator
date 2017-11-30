@@ -3,10 +3,10 @@ function displayFactory() {
     var displayDomElement = document.querySelector("#display");
     return {
         numberAddDigit: function (digit) {
-            if (digit == "." && displayDomElement.innerText.indexOf(".") == -1) {
+            if (digit === "." && displayDomElement.innerText.indexOf(".") === -1) {
                     displayDomElement.innerHTML += "<span>.</span>";
             } else {
-                if (displayDomElement.innerText == "0") {
+                if (displayDomElement.innerText === "0") {
                     displayDomElement.innerText = digit.toString();
                 } else if (displayDomElement.innerText.replace(".", "").length < DISPLAY_LENGTH) {
                     displayDomElement.innerHTML += digit;
@@ -15,7 +15,7 @@ function displayFactory() {
             return false;
         },
         numberShow: function (value) {
-            if (value == Infinity) {
+            if (value === Infinity) {
                 displayDomElement.innerText = "ERROR";
                 return true;
             } else {
@@ -39,10 +39,7 @@ function displayFactory() {
             displayDomElement.innerHTML = "0";
         },
         numberValue: function () {
-            return displayDomElement.innerText;
-        },
-        numberLength: function () {
-            return displayDomElement.innerText.replace(".", "").length;
+            return parseFloat(displayDomElement.innerText);
         },
         numberHasDot: function () {
             return displayDomElement.innerHTML.indexOf(".") > -1;
