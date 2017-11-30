@@ -1,26 +1,48 @@
 function displayFactory() {
+    const DISPLAY_LENGTH = 8;
     var displayDomElement = document.querySelector("#display");
     return {
-        setNumber: function (digit) {
-            if (digit == Infinity) {
-                displayDomElement.value = "Error";
-                return true;
-            }
-            if (displayDomElement.value == "0") {
-                displayDomElement.value = digit.toString();
+        numberAddDigit: function (digit) {
+            if (digit === "." && displayDomElement.innerText.indexOf(".") === -1) {
+                    displayDomElement.innerHTML += "<span>.</span>";
             } else {
-                displayDomElement.value += digit.toString();
+                if (displayDomElement.innerText === "0") {
+                    displayDomElement.innerText = digit.toString();
+                } else if (displayDomElement.innerText.replace(".", "").length < DISPLAY_LENGTH) {
+                    displayDomElement.innerHTML += digit;
+                }
             }
             return false;
         },
+        numberShow: function (value) {
+            if (value === Infinity) {
+                displayDomElement.innerText = "ERROR";
+                return true;
+            } else {
+                if (Math.floor(value).toString().replace(".", "").length <= DISPLAY_LENGTH) {
+                    var valueString = value.toString();
+                    if (valueString.indexOf(".") > -1) {
+                        displayDomElement.innerHTML = valueString
+                            .slice(0, 9)
+                            .replace(".", "<span>.</span>");
+                    } else {
+                        displayDomElement.innerText = valueString;
+                    }
+                    return false;
+                } else {
+                    displayDomElement.innerText = "ERROR";
+                    return true;
+                }
+            }
+        },
         numberReset: function () {
-            displayDomElement.value = "0";
+            displayDomElement.innerHTML = "0";
         },
         numberValue: function () {
-            return displayDomElement.value;
+            return parseFloat(displayDomElement.innerText);
         },
-        numberLength: function () {
-            return displayDomElement.length;
+        numberHasDot: function () {
+            return displayDomElement.innerHTML.indexOf(".") > -1;
         }
     };
 }

@@ -1,10 +1,27 @@
 window.onload = function() {
-    // Default state
-    var subtotal = 0;
-    var editable = false;
-    var operator =  "+";
+    var subtotal, editable, operator, lastOperator, lastOperand;
     var display = displayFactory();
+
     display.numberReset();
+    resetCalculator();
+
+    document.onkeydown = function(event) {
+        eventHandler(event.key);
+        console.log(event.key);
+    };
+
+    document.querySelectorAll("input[type='button']").forEach(function(element) {
+        element.onclick = function (event) {
+            eventHandler(event.target.value);
+            console.log(event.target.value);
+        };
+    });
+
+    function resetCalculator() {
+        subtotal = 0;
+        operator = "+";
+        editable = false;
+    }
 
     function eventHandler(key) {
         switch (key) {
@@ -18,14 +35,24 @@ window.onload = function() {
             case "7":
             case "8":
             case "9":
-                if (!(editable && display.numberLength() >= 8)) {
-                    if (editable && display.numberValue() != "0") {
-                        display.setNumber(key);
-                    } else {
-                        display.numberReset();
-                        display.setNumber(key);
-                        editable = true;
+                if (editable && display.numberValue() !== 0) {
+                    display.numberAddDigit(key);
+                } else {
+                    display.numberReset();
+                    display.numberAddDigit(key);
+                    editable = true;
+                }
+                break;
+            case ".":
+            case ",":
+                if (editable) {
+                    if (!display.numberHasDot()) {
+                        display.numberAddDigit(".");
                     }
+                } else {
+                    display.numberReset();
+                    display.numberAddDigit(".");
+                    editable = true;
                 }
                 break;
             case "Delete":
@@ -33,50 +60,41 @@ window.onload = function() {
             case "C":
             case "c":
                 display.numberReset();
-                subtotal = 0;
-                operator = "+";
-                editable = false;
+                resetCalculator();
                 break;
             case "+":
             case "-":
             case "*":
             case "/":
                 if (editable) {
-                    subtotal = operation(subtotal, parseInt(display.numberValue()), operator);
+                    subtotal = operation(subtotal, display.numberValue(), operator);
                     display.numberReset();
-                    if (display.setNumber(subtotal)) {
-                        subtotal = 0;
-                        operator = "+";
-                        editable = false;
+                    if (display.numberShow(subtotal)) {
+                        resetCalculator();
                         break;
                     }
                     editable = false;
+                } else if (isNaN(display.numberValue())) {
+                    resetCalculator();
+                    break;
+                } else {
+                    subtotal = display.numberValue();
                 }
                 operator = key;
                 break;
             case "=":
             case "Enter":
                 if (editable) {
-                    var temp = operation(subtotal, parseInt(display.numberValue()), operator);
+                    lastOperator = operator;
+                    lastOperand = display.numberValue();
+                    var temp = operation(subtotal, display.numberValue(), operator);
                     display.numberReset();
-                    display.setNumber(temp);
-                    subtotal = 0;
-                    operator = "+";
-                    editable = false;
+                    display.numberShow(temp);
+                    resetCalculator();
+                } else if (!isNaN(display.numberValue())) {
+                    display.numberShow(operation(display.numberValue(), lastOperand, lastOperator));
                 }
                 break;
         }
     }
-
-    document.onkeydown = function(event) {
-        eventHandler(event.key);
-        console.log(event.key);
-    };
-
-    document.querySelectorAll("input[type='button']").forEach(function(element) {
-        element.onclick = function (event) {
-            eventHandler(event.target.value);
-            console.log(event.target.value);
-        };
-    });
 };

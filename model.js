@@ -1,12 +1,12 @@
 function operation(operand1, operand2, operator) {
     switch (operator) {
         case "+":
-            return operand1 + operand2;
+            return sinfulMath.add(operand1, operand2);
         case "-":
-            return operand1 - operand2;
+            return sinfulMath.sub(operand1, operand2);
         case "*":
-            return operand1 * operand2;
+            return sinfulMath.mul(operand1, operand2);
         case "/":
-            return operand1 / operand2;
+            return sinfulMath.div(operand1, operand2);
     }
 }
