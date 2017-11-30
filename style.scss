@@ -18,6 +18,7 @@ body {
     min-height: 551px;
     height: 100vh;
     margin: 0;
+    background: #fefefe;
 }
 
 form {
@@ -85,30 +86,31 @@ input[type="button"] {
     width: 38px;
     height: 38px;
     background: #0C0C0C;
-    box-shadow: inset 18px 18px 3px -16px #8F8F91, 0 0 2px black;
+    box-shadow: inset 18px 18px 3px -16px #8F8F91, 0 0 6px black;
     outline: 0;
+    transition: box-shadow 0.05s ease-in-out;
 
     &:active {
-        box-shadow: inset -18px -18px 3px -16px #8F8F91, 0 0 2px black;
+        box-shadow: inset 14px 14px 3px -16px #8F8F91, 0 0 0 black;
     }
 }
 
 .brown {
     background: #332016 !important;
-    box-shadow: inset 18px 18px 12px -16px #B3A29B, 0 0 2px black !important;
+    box-shadow: inset 18px 18px 12px -16px #B3A29B, 0 0 6px black !important;
 
     &:active {
-        box-shadow: inset -18px -18px 12px -16px #B3A29B, 0 0 2px black !important;
+        box-shadow: inset 14px 14px 12px -16px #B3A29B, 0 0 0 black !important;
     }
 }
 
 .orange {
-    background: #DCA84F !important;
-    box-shadow: inset 18px 18px 12px -16px #F4D9A7, 0 0 2px black !important;
+    background: #cf8d37 !important;
+    box-shadow: inset 18px 18px 12px -16px #F4D9A7, 0 0 6px black !important;
     color: black !important;
 
     &:active {
-        box-shadow: inset -18px -18px 12px -16px #F4D9A7, 0 0 2px black !important;
+        box-shadow: inset 14px 14px 12px -16px #F4D9A7, 0 0 0 black !important;
     }
 }
 
