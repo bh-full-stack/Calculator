@@ -1,6 +1,8 @@
 window.onload = function() {
     var subtotal, editable, operator, lastOperator, lastOperand;
+    var memory = 0;
     var display = displayFactory();
+    var displayDomElement = document.querySelector("#display");
 
     display.numberReset();
     resetCalculator();
@@ -54,6 +56,7 @@ window.onload = function() {
                     display.numberAddDigit(".");
                     editable = true;
                 }
+                console.log(typeof key)
                 break;
             case "Backspace":
                 if (editable && display.numberLengthWithDot() > 1) {
@@ -99,6 +102,22 @@ window.onload = function() {
                 } else if (!isNaN(display.numberValue())) {
                     display.numberShow(operation(display.numberValue(), lastOperand, lastOperator));
                 }
+                break;
+            case "M+":
+                memory += display.numberValue();
+                editable = false;
+                break;
+            case "M-":
+                memory -= display.numberValue();
+                editable = false;
+                break;
+            case "MR":
+                display.numberReset();
+                display.numberAddDigit(memory);
+                editable = true;
+                break;
+            case "MC":
+                memory = 0;
                 break;
         }
     }
