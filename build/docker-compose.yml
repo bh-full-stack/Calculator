@@ -2,8 +2,10 @@ version: '3'
 services:
   calculator:
     build:
-      context: "./images/calculator"
+      context: "."
+      args:
+        - APP_HOST=localhost
     volumes:
       - "../public:/var/www/html/"
     ports:
-     - "81"
+     - "81:80"
